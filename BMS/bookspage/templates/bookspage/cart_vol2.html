@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Card</title>
+    <style>
+        .product-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #ff5733; /* Change to your desired color */
+        }
+
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* Change to your desired color */
+            color: #fff;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background-color: #0056b3; /* Change to your desired color */
+        }
+    </style>
+</head>
+<body>
+    <div class="product-card">
+        <img  style="height:100px" src="https://www.bookswagon.com/productimages/images200/530/9781974700530.jpg" alt="Product Image" class="product-image">
+        <h3 class="product-title">Demon slayer vol2</h3>
+        <p class="product-price">531</p>
+       <a href="{% url 'form' %}"><button class="buy-button">Buy Now</button></a>
+    </div>
+</body>
+</html>

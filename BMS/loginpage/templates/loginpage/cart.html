@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'loginpage/css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .cart {
+            width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .book {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .book img {
+            width: 50px;
+            height: 70px;
+            object-fit: cover;
+        }
+
+        .book-details {
+            text-align: left;
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .add-to-cart {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background-color: #45a049;
+        }
+
+        .remove-button {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+<ul>
+  <li ><a href="{% url 'two' %}">Home</a></li>
+  <li > <a href="{% url 'main' %}">Books</a></li>
+  <li><a href="#contact">Contact</a></li>
+      <li><a href="{% url 'profile' %}">profile</a></li>
+          <li class="active"><a href="{% url 'cart' %}">Top Rated</a></li>
+
+
+  <li style="float:right"><a href="{% url 'one' %}">log out</a></li>
+
+</ul>
+
+    <div class="cart" id="cart">
+        <h2>Your Cart</h2>
+        <p id="cart-count">Number of books in cart: 0</p>
+    </div>
+
+    <div id="bookContainer">
+        <div class="book" id="book1">
+            <img src="https://www.bookswagon.com/productimages/images200/523/9781974700523.jpg" alt="Demon slayer vol1">
+            <div class="book-details">
+                <p>Demon Slayer vol1</p>
+                <p>Price: $540</p>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('book1', 'Demon Slayer vol1', 540)">Add to Cart</button>
+        </div>
+        <div class="book" id="book2">
+            <img src="https://www.bookswagon.com/productimages/mainimages/849/9781421582849.jpg" alt="Naruto vol78">
+            <div class="book-details">
+                <p>Naruto vol78</p>
+                <p>Price: $550</p>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('book2', 'Naruto vol78', 550)">Add to Cart</button>
+        </div>
+        <!-- Add more book entries as needed -->
+        <div class="book" id="book3">
+            <img src="https://www.bookswagon.com/productimages/images200/547/9781974700547.jpg" alt="Demon Slayer">
+            <div class="book-details">
+                <p>Demon Slayer</p>
+                <p>Price: $560</p>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('book3', 'Demon Slayer', 560)">Add to Cart</button>
+        </div>
+        <div class="book" id="book4">
+            <img src="https://www.bookswagon.com/productimages/images200/544/9781421520544.jpg" alt="Vagabond vol1">
+            <div class="book-details">
+                <p>Vagabond vol1</p>
+                <p>Price: $600</p>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('book4', 'Vagabond vol1', 600)">Add to Cart</button>
+        </div>
+        <div class="book" id="book5">
+            <img src="https://www.bookswagon.com/productimages/images200/456/9781421522456.jpg" alt="Vagabond vol3">
+            <div class="book-details">
+                <p>Vagabond vol3</p>
+                <p>Price: $460</p>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('book5', 'Vagabond vol3', 460)">Add to Cart</button>
+        </div>
+    </div>
+
+    <a href="{% url 'form' %}"> <button class="add-to-cart" >Checkout</button></a>
+<br>
+<br>
+<br>
+
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-linkedin-in"></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Form -->
+    <section class="">
+      <form action="">
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+          <!--Grid column-->
+          <div class="col-auto">
+            <p class="pt-2">
+              <strong>Sign up for our newsletter</strong>
+            </p>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-5 col-12">
+            <!-- Email input -->
+            <div class="form-outline form-white mb-4">
+              <input type="email" id="form5Example21" class="form-control" />
+              <label class="form-label" for="form5Example21">Email address</label>
+            </div>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-auto">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-light mb-4">
+              Subscribe
+            </button>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </form>
+    </section>
+    <!-- Section: Form -->
+
+    <!-- Section: Text -->
+    <section class="mb-4">
+      <p>
+        This is a Online book store System Website.
+      </p>
+    </section>
+    <!-- Section: Text -->
+
+    <!-- Section: Links -->
+    <section>
+      <!--Grid row-->
+      <center>
+      <div>
+        <!--Grid column-->
+        <div>
+          <h5 class="text-uppercase">Links</h5>
+          <ul class="row" style="background-color:#343A40">
+            <li>
+              <a href="/home" class="text-white">Home</a>
+            </li>
+            <li>
+              <a href="/models1" class="text-white">Models</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 4</a>
+            </li>
+          </ul>
+        </div>
+      </center>
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2020 Copyright:
+    <a class="text-white" href="/home">KcBookstore.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+
+    <script>
+        let cartCount = 0;
+        let bookCounts = {};
+
+        function addToCart(bookId, title, price) {
+            var cart = document.getElementById('cart');
+            var book = document.createElement('div');
+            book.classList.add('book');
+
+            var image = document.createElement('img');
+            image.src = 'https://www.bookswagon.com/productimages/images200/523/' + bookId + '.jpg';
+            image.alt = title;
+            image.style.width = '50px';
+            image.style.height = '70px';
+            image.style.objectFit = 'cover';
+
+            var details = document.createElement('div');
+            details.classList.add('book-details');
+
+            var titleParagraph = document.createElement('p');
+            titleParagraph.textContent = title;
+
+            var priceParagraph = document.createElement('p');
+            priceParagraph.textContent = 'Price: $' + price;
+
+            var removeButton = document.createElement('button');
+            removeButton.classList.add('remove-button');
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = function () {
+                cart.removeChild(book);
+                updateCartCount(-1);
+                updateBookCount(bookId, -1);
+            };
+
+            details.appendChild(titleParagraph);
+            details.appendChild(priceParagraph);
+
+            book.appendChild(image);
+            book.appendChild(details);
+            book.appendChild(removeButton);
+
+            cart.appendChild(book);
+            updateCartCount(1);
+            updateBookCount(bookId, 1);
+        }
+
+        function updateCartCount(count) {
+            cartCount += count;
+            document.getElementById('cart-count').textContent = `Number of books in cart: ${cartCount}`;
+        }
+
+        function updateBookCount(bookId, count) {
+            if (bookCounts[bookId]) {
+                bookCounts[bookId] += count;
+            } else {
+                bookCounts[bookId] = count;
+            }
+            console.log(bookCounts);
+        }
+
+        function submitCart() {
+            // You can change the URL to the page where you want to redirect the user
+            window.location.href = '';
+        }
+    </script>
+</body>
+</html>
